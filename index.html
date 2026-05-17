@@ -3,324 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Math - Educational Proxy</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            width: 100%;
-            padding: 40px;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .subtitle {
-            color: #666;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        button {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .info-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .examples {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .examples h3 {
-            color: #856404;
-            margin-bottom: 10px;
-        }
-
-        .examples ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .examples li {
-            color: #856404;
-            margin: 5px 0;
-        }
-
-        .examples a {
-            color: #667eea;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .examples a:hover {
-            text-decoration: underline;
-        }
-
-        .status {
-            display: none;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            margin-top: 20px;
-        }
-
-        .status.loading {
-            display: block;
-            background: #e3f2fd;
-            border-left: 4px solid #2196F3;
-            color: #1976D2;
-        }
-
-        .status.success {
-            display: block;
-            background: #e8f5e9;
-            border-left: 4px solid #4CAF50;
-            color: #2e7d32;
-        }
-
-        .status.error {
-            display: block;
-            background: #ffebee;
-            border-left: 4px solid #f44336;
-            color: #c62828;
-        }
-
-        .loader {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #2196F3;
-            margin-right: 5px;
-            animation: bounce 1.4s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 80%, 100% { opacity: 0.3; }
-            40% { opacity: 1; }
-        }
-
-        .documentation {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid #ddd;
-        }
-
-        .documentation h2 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .documentation p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        code {
-            background: #f5f5f5;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            color: #d63384;
-        }
-    </style>
+    <title>Premium Math - Wikipedia Explorer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>🎓 Premium Math</h1>
-        <p class="subtitle">Educational Proxy - Learn how web proxies work</p>
+        <header>
+            <h1>📚 Premium Math</h1>
+            <p>Explore random Wikipedia articles or discover games</p>
+        </header>
 
-        <div class="info-box">
-            <strong>📚 What is this?</strong><br>
-            This is an educational proxy project to demonstrate how web proxies work. Enter any URL below to see how proxy servers forward requests and responses.
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search Wikipedia or type 'games' for gaming assets..." />
+            <button id="searchBtn">Search</button>
+            <button id="randomBtn">Random Article</button>
         </div>
 
-        <div class="input-group">
-            <input 
-                type="text" 
-                id="urlInput" 
-                placeholder="Enter URL (e.g., http://example.com)" 
-                value="http://example.com"
-            >
-            <button onclick="fetchProxy()">Visit</button>
-        </div>
-
-        <div id="status" class="status"></div>
-
-        <div class="examples">
-            <h3>📖 Try These Examples:</h3>
-            <ul>
-                <li><a onclick="loadUrl('http://example.com')">→ example.com</a></li>
-                <li><a onclick="loadUrl('http://httpbin.org/html')">→ httpbin.org/html</a></li>
-                <li><a onclick="loadUrl('http://www.iana.org')">→ iana.org</a></li>
-            </ul>
-        </div>
-
-        <div class="documentation">
-            <h2>How This Works</h2>
-            <p>
-                This educational project demonstrates proxy concepts:
-            </p>
-            <ul style="margin-left: 20px; color: #666; font-size: 14px; line-height: 1.8;">
-                <li><strong>Request Forwarding:</strong> Your request is sent through a proxy server</li>
-                <li><strong>Protocol Handling:</strong> Supports both HTTP and HTTPS</li>
-                <li><strong>Response Forwarding:</strong> The response is sent back to you</li>
-                <li><strong>Header Management:</strong> Proper HTTP header handling</li>
-                <li><strong>Error Handling:</strong> Graceful handling of connection issues</li>
-            </ul>
-            <p style="margin-top: 15px;">
-                <strong>⚠️ Note:</strong> This is for educational purposes only. Some websites may not work perfectly due to CORS (Cross-Origin Resource Sharing) restrictions or script blocking.
-            </p>
-            <p style="margin-top: 10px;">
-                <strong>📖 Source Code:</strong> <a href="https://github.com/SERTYUIHVGX/premiumMath" style="color: #667eea; text-decoration: none;">View on GitHub</a>
-            </p>
+        <div id="articleContainer" class="article-container">
+            <div class="loading">Loading...</div>
         </div>
     </div>
 
-    <script>
-        function showStatus(message, type) {
-            const statusEl = document.getElementById('status');
-            statusEl.textContent = '';
-            
-            if (type === 'loading') {
-                const loader = document.createElement('span');
-                loader.className = 'loader';
-                statusEl.appendChild(loader);
-                const text = document.createElement('span');
-                text.textContent = message;
-                statusEl.appendChild(text);
-            } else {
-                statusEl.textContent = message;
-            }
-            
-            statusEl.className = `status ${type}`;
-        }
+    <!-- Games Popup Modal -->
+    <div id="gamesModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2>🎮 Featured Games & Assets</h2>
+            <div id="gamesList" class="games-grid"></div>
+        </div>
+    </div>
 
-        function loadUrl(url) {
-            document.getElementById('urlInput').value = url;
-            fetchProxy();
-        }
-
-        function fetchProxy() {
-            const url = document.getElementById('urlInput').value.trim();
-            
-            if (!url) {
-                showStatus('❌ Please enter a URL', 'error');
-                return;
-            }
-
-            // Ensure URL has protocol
-            let fullUrl = url;
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                fullUrl = 'http://' + url;
-            }
-
-            showStatus('Fetching content...', 'loading');
-
-            // Use CORS proxy to fetch content
-            const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-            
-            fetch(corsProxy + fullUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    showStatus('✅ Content loaded successfully! Check browser console for details.', 'success');
-                    console.log('URL:', fullUrl);
-                    console.log('Content length:', data.length);
-                    console.log('First 500 characters:', data.substring(0, 500));
-                })
-                .catch(error => {
-                    showStatus(`❌ Error: ${error.message}. CORS restrictions may apply.`, 'error');
-                    console.error('Fetch error:', error);
-                });
-        }
-
-        // Allow Enter key to trigger fetch
-        document.getElementById('urlInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                fetchProxy();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
