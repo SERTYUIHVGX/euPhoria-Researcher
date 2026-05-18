@@ -1,16 +1,9 @@
-Got it! Let’s strip out all that dashboard noise and return to a clean, hyper-focused, pure academic research utility.
-
-Here is the code restored strictly to its core mission: an upgraded version of your original **euPhoria Researcher** application. It preserves the classic 2005 aesthetic and color-picking feature while using a few highly relevant, clean text-only APIs from your list (**Wikipedia API**, **Open Library API**, and the **CrossRef Metadata API**) to dynamically fetch real-world academic data when you hit search.
-
-No robots, no weather, no crypto—just pure reference material.
-
-### Restored Codebase
-
-```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Crucial Layer: Force fixed scale and disable all multi-touch/trackpad zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>euPhoria Researcher</title>
 <style type="text/css">
 /* 2005 Style Reset and Core Typography */
@@ -21,6 +14,9 @@ body {
     margin: 0px;
     padding: 0px;
     font-size: 12px;
+    /* Locks horizontal view strictly to prevent side-scrolling while permitting vertical scroll */
+    overflow-x: hidden; 
+    width: 100%;
 }
 /* Satin Black Header and Dynamic Accent Frame Layer */
 #header {
@@ -633,7 +629,7 @@ function lookupWord() {
                 <h3>System News</h3>
                 <font size="1" color="#555555">
                     <b>May 17, 2026:</b><br>
-                    Upgraded operational script security profiles for 100% search layout retention across live dictionary and dynamic article render channels. Interface updated to premium Satin Black base. Enabled color morph capabilities seamlessly.
+                    Upgraded operational script security profiles for 100% search layout retention across live dictionary and dynamic article render channels. Interface updated to premium Satin Black base. Enabled color morph capabilities seamlessly. Fixed layout viewport viewport boundary locked.
                 </font>
             </div>
         </div>
@@ -676,5 +672,3 @@ function lookupWord() {
 
 </body>
 </html>
-
-```
