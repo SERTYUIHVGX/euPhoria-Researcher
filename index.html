@@ -1,3 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>euPhoria Researcher</title>
+<style type="text/css">
+/* 2005 Style Reset and Core Typography */
+body {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+background-color: #F5F5F5;
+color: #222222;
 margin: 0px;
 padding: 0px;
 font-size: 12px;
@@ -5,7 +16,54 @@ font-size: 12px;
 }
 
 /* Satin Black Header and Dynamic Accent Frame Layer */
-@@ -66,9 +67,8 @@
+#header {
+background: linear-gradient(to bottom, #111111 0%, #1A1A1A 100%);
+border-bottom: 3px solid var(--accent-color, #990000);
+padding: 18px 20px;
+color: #FFFFFF;
+}
+#header h1 {
+margin: 0px;
+font-family: Georgia, "Times New Roman", serif;
+font-size: 28px;
+font-style: italic;
+color: #FFFFFF;
+text-shadow: 1px 1px 3px var(--accent-shadow, rgba(153, 0, 0, 0.8));
+}
+#header p {
+margin: 5px 0px 0px 0px;
+font-size: 11px;
+letter-spacing: 1px;
+color: #BBBBBB;
+}
+
+/* Top Navigation Bar */
+#navbar {
+background-color: #EAEAEA;
+border-bottom: 1px solid #CCCCCC;
+padding: 6px 20px;
+font-size: 11px;
+font-weight: bold;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.nav-links a {
+color: #333333;
+text-decoration: none;
+margin-right: 15px;
+}
+.nav-links a:hover {
+color: var(--accent-color, #990000);
+text-decoration: underline;
+}
+
+/* Settings System Panel Overlay Element */
+#settings-control {
+display: inline-flex;
+align-items: center;
+background: #E5E5E5;
+border-top: 1px solid #FFF;
 border-left: 1px solid #FFF;
 border-bottom: 1px solid #777;
 border-right: 1px solid #777;
@@ -16,7 +74,14 @@ font-size: 11px;
 }
 #colorPicker {
 margin-left: 5px;
-@@ -83,10 +83,11 @@
+padding: 0px;
+width: 32px;
+height: 18px;
+border: 1px solid #555;
+cursor: pointer;
+vertical-align: middle;
+}
+
 /* Main Layout Container */
 #container {
 width: 98%;
@@ -29,7 +94,27 @@ border: 1px solid #888888;
 }
 
 /* Search Banner Area */
-@@ -114,6 +115,7 @@
+#search-zone {
+background-color: #FAFAFA;
+border-bottom: 2px dashed #CCCCCC;
+padding: 20px;
+text-align: center;
+}
+.search-box {
+font-size: 16px;
+padding: 4px;
+width: 450px;
+border: 1px solid #999999;
+color: #222222;
+}
+.btn-2005 {
+font-size: 14px;
+font-weight: bold;
+background: #E5E5E5;
+border-top: 2px solid #FFF;
+border-left: 2px solid #FFF;
+border-bottom: 2px solid #555;
+border-right: 2px solid #555;
 padding: 3px 10px;
 cursor: pointer;
 color: #222222;
@@ -37,23 +122,10 @@ color: #222222;
 }
 .btn-2005:active {
 border-top: 2px solid #555;
-@@ -122,24 +124,58 @@
+border-left: 2px solid #555;
+border-bottom: 2px solid #FFF;
 border-right: 2px solid #FFF;
-}
-
-        /* Nonstop Activity Pulse Badge */
-        #nonstop-badge {
-            margin-top: 8px;
-            display: inline-block;
-            background: #000000;
-            color: #00FF00;
-            font-family: "Courier New", Courier, monospace;
-            font-weight: bold;
-            font-size: 11px;
-            padding: 4px 10px;
-            border: 1px solid #333333;
-            letter-spacing: 1px;
-            text-shadow: 0 0 4px rgba(0,255,0,0.6);
+            
         }
 
         /* History Breadcrumb Trail */
@@ -97,7 +169,16 @@ margin-bottom: 15px;
 }
 .sidebar-box h3 {
 margin: 0 0 8px 0;
-@@ -156,6 +192,7 @@
+font-size: 12px;
+color: var(--accent-color, #990000);
+border-bottom: 1px solid #EAEAEA;
+padding-bottom: 3px;
+}
+.sidebar-box ul {
+list-style-type: square;
+margin: 0px;
+padding-left: 18px;
+}
 .sidebar-box li {
 margin-bottom: 5px;
 font-size: 11px;
@@ -105,7 +186,10 @@ font-size: 11px;
 }
 .sidebar-box a {
 color: #444444;
-@@ -166,9 +203,34 @@
+text-decoration: none;
+}
+.sidebar-box a:hover {
+color: var(--accent-color, #990000);
 text-decoration: underline;
 }
 
@@ -141,7 +225,25 @@ text-decoration: underline;
 font-size: 11px;
 padding: 2px;
 border: 1px solid #999999;
-@@ -194,6 +256,28 @@
+}
+.btn-dict {
+font-size: 11px;
+padding: 1px 5px;
+font-weight: bold;
+}
+#dict-result {
+margin-top: 8px;
+padding: 5px;
+background-color: #FAFAFA;
+border: 1px dotted #999999;
+font-size: 11px;
+line-height: 1.3;
+max-height: 160px;
+overflow-y: auto;
+}
+
+/* Main Content Window */
+#main-content {
 flex-grow: 1;
 padding: 20px;
 min-height: 400px;
@@ -170,7 +272,11 @@ min-height: 400px;
 }
 
 /* Article Formatting Styling */
-@@ -205,6 +289,7 @@
+.article-title {
+font-family: Georgia, serif;
+color: var(--accent-color, #990000);
+font-size: 24px;
+margin-top: 0px;
 margin-bottom: 5px;
 border-bottom: 1px solid #CCCCCC;
 padding-bottom: 5px;
@@ -178,7 +284,10 @@ padding-bottom: 5px;
 }
 .meta-info {
 font-size: 11px;
-@@ -215,10 +300,13 @@
+color: #444444;
+margin-bottom: 15px;
+background-color: #FAFAFA;
+padding: 5px;
 border: 1px dashed var(--accent-color, #990000);
 }
 .article-text {
@@ -193,7 +302,25 @@ text-align: justify;
 .article-text b {
 color: var(--accent-color, #990000);
 }
-@@ -244,13 +332,32 @@
+.article-image {
+float: right;
+margin-left: 15px;
+margin-bottom: 15px;
+background-color: #EAEAEA;
+border: 3px double #999999;
+padding: 5px;
+text-align: center;
+width: 250px;
+}
+.article-image img {
+width: 100%;
+height: auto;
+border: 1px solid #666666;
+}
+.image-caption {
+font-size: 10px;
+color: #555555;
+font-style: italic;
 margin-top: 4px;
 }
 
@@ -227,7 +354,32 @@ border: 1px solid #EAEAEA;
 #summary-box {
 display: none;
 margin-top: 15px;
-@@ -283,56 +390,293 @@
+background-color: #FAFAFA;
+border: 1px solid var(--accent-color, #990000);
+padding: 15px;
+}
+#summary-box h4 {
+margin: 0 0 5px 0;
+color: var(--accent-color, #990000);
+}
+
+/* Satin Black Hit Counter Footer */
+#footer {
+background-color: #111111;
+color: #CCCCCC;
+text-align: center;
+padding: 15px;
+font-size: 11px;
+border-top: 2px solid var(--accent-color, #990000);
+}
+.counter {
+background-color: #000000;
+color: #FF3333;
+font-family: "Courier New", Courier, monospace;
+padding: 2px 5px;
+font-weight: bold;
+border: 1px solid #444444;
+}
 </style>
 
 <script type="text/javascript">
@@ -540,7 +692,9 @@ resultsDiv.innerHTML = `
 function isGibberish(str) {
 var cleanStr = str.replace(/[^a-zA-Z]/g, "").toLowerCase();
 if (cleanStr.length === 0) return false;
-@@ -342,7 +686,7 @@ <h3>Supported Networks Included in Meta-Querying:</h3>
+if (/([a-z])\1{4,}/.test(cleanStr)) return true;
+if (/[bcdfghjklmnpqrstvwxz]{6,}/.test(cleanStr)) return true;
+if (/[aeiou]{6,}/.test(cleanStr)) return true;
 return false;
 }
 
@@ -549,7 +703,17 @@ return false;
 function performSearch() {
 var rawInput = document.getElementById("searchQuery");
 if (!rawInput) return;
-@@ -360,335 +704,262 @@ <h3>Supported Networks Included in Meta-Querying:</h3>
+
+var rawQuery = rawInput.value.trim();
+var queryNormalized = rawQuery.toLowerCase();
+var resultsDiv = document.getElementById("article-display");
+var summaryBox = document.getElementById("summary-box");
+
+if (summaryBox) summaryBox.style.display = "none";
+if (!resultsDiv) return;
+
+if (rawQuery === "") {
+alert("Please enter a research topic first!");
 return;
 }
 
@@ -1026,3 +1190,6 @@ return;
 </div>
 
 </div>
+
+</body>
+</html>
