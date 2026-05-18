@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>euPhoria Researcher Matrix v24.0 - Cloud Dancer Edition</title>
+<title>euPhoria Researcher Matrix v25.0 - Cloud Dancer Edition</title>
 <style type="text/css">
 html, body { height: 100%; margin: 0px; padding: 0px; }
 body {
@@ -41,7 +41,7 @@ body {
 .sidebar-box { background: #FFFFFF; border: 1px solid #D1DCE5; padding: 12px; margin-bottom: 15px; border-radius: 2px; }
 .sidebar-box h3 { margin: 0 0 10px 0; font-size: 14px; color: var(--accent-color, #7FB3D5); border-bottom: 1px solid #EAF0F4; padding-bottom: 5px; }
 .node-status-list { list-style: none; padding: 0; margin: 0; font-size: 11px; line-height: 1.6; }
-.node-status-list li { display: flex; justify-content: space-between; border-bottom: 1px dashed #E0E7ED; padding: 2px 0; color: #555; }
+.node-status-list li { display: flex; justify-content: space-between; border-bottom: 1px dashed #E0E7ED; padding: 2px 0; color: #555; height: 18px; align-items: center; }
 .status-loading { color: #EEA000; font-weight: bold; }
 .status-online { color: #2E8B57; font-weight: bold; }
 .status-offline { color: #CD5C5C; font-weight: bold; }
@@ -83,7 +83,9 @@ function applySystemColorTheme(hexValue) {
 
 function updateNodeIndicator(id, statusText, cssClass) {
     var el = document.getElementById("node-" + id);
-    if (el) { el.innerHTML = '<span class="' + cssClass + '">' + statusText + '</span>'; }
+    if (el) { 
+        el.innerHTML = statusText ? '<span class="' + cssClass + '">' + statusText + '</span>' : ''; 
+    }
 }
 
 function injectSegment(targetId, label, innerContent) {
@@ -140,7 +142,8 @@ function performSearch() {
     skeleton += '<div class="article-image" id="matrix-visual-lab"></div>';
     skeleton += '<div id="wiki-summary-box" style="font-size:15px; line-height:1.6; margin-bottom:25px; font-family:Georgia, serif;"></div>';
     
-    skeleton += '<div class="chapter-container" id="chap-1"><div class="chapter-title">Chapter 1: Foundations & Literary Catalogs</div><div id="seg-2" class="stream-segment"></div><div id="seg-3" class="stream-segment"></div><div id="seg-7" class="stream-segment"></div><div id="seg-16" class="stream-segment"></div><div id="seg-19" class="stream-segment"></div></div>';
+    // Chapter 1 now contains placeholders for both dictionary definition sets and structural library arrays
+    skeleton += '<div class="chapter-container" id="chap-1"><div class="chapter-title">Chapter 1: Foundations, Dictionary Definitions & Literary Catalogs</div><div id="seg-dict" class="stream-segment"></div><div id="seg-2" class="stream-segment"></div><div id="seg-3" class="stream-segment"></div><div id="seg-7" class="stream-segment"></div><div id="seg-16" class="stream-segment"></div><div id="seg-19" class="stream-segment"></div></div>';
     skeleton += '<div class="chapter-container" id="chap-2"><div class="chapter-title">Chapter 2: Peer-Reviewed Scientific Serials</div><div id="seg-4" class="stream-segment"></div><div id="seg-9" class="stream-segment"></div><div id="seg-13" class="stream-segment"></div><div id="seg-15" class="stream-segment"></div><div id="seg-17" class="stream-segment"></div></div>';
     skeleton += '<div class="chapter-container" id="chap-3"><div class="chapter-title">Chapter 3: Clinical Trials & Life Science Protocols</div><div id="seg-5" class="stream-segment"></div><div id="seg-11" class="stream-segment"></div><div id="seg-12" class="stream-segment"></div><div id="seg-14" class="stream-segment"></div><div id="seg-18" class="stream-segment"></div></div>';
     skeleton += '<div class="chapter-container" id="chap-4"><div class="chapter-title">Chapter 4: Verified Open-Access Portals & Datasets</div><div id="seg-8" class="stream-segment"></div><div id="seg-10" class="stream-segment"></div><div id="seg-20" class="stream-segment"></div></div>';
@@ -148,6 +151,7 @@ function performSearch() {
     
     display.innerHTML = skeleton;
 
+    // Reset status trackers (Clear previous markings cleanly)
     for (var n = 1; n <= 20; n++) { updateNodeIndicator(n, "FETCHING", "status-loading"); }
 
     function executeStream(nodeId, url, parserFunc, nodeLabel) {
@@ -163,7 +167,32 @@ function performSearch() {
             .catch(() => { updateNodeIndicator(nodeId, "TIMEOUT", "status-offline"); });
     }
 
-    // Node 1: Wikipedia
+    // Integrated Dictionary/Thesaurus Pipeline Connection Block
+    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encoded)
+        .then(res => res.ok ? res.json() : Promise.reject())
+        .then(data => {
+            if (data && data[0]) {
+                var html = '<div style="background-color:#F4F7F9; padding:12px; border:1px solid #D1DCE5; margin-bottom:15px;">';
+                html += '<h4 style="margin:0 0 5px 0; font-family:Georgia,serif; color:#2E5B82;">Lexicographical Reference Entry: <i>' + data[0].word + '</i> [' + (data[0].phonetic || "") + ']</h4>';
+                if(data[0].meanings) {
+                    data[0].meanings.slice(0,2).forEach(m => {
+                        html += '<p style="margin:4px 0; font-size:13px;"><b>(' + m.partOfSpeech + ')</b> ' + m.definitions[0].definition + '</p>';
+                        if(m.synonyms && m.synonyms.length > 0) {
+                            html += '<p style="margin:2px 0 6px 0; font-size:12px; color:#555;"><i>Conceptual Equivalents:</i> ' + m.synonyms.slice(0,5).join(', ') + '</p>';
+                        }
+                    });
+                }
+                html += '</div>';
+                var targetSeg = document.getElementById("seg-dict");
+                if(targetSeg) {
+                    targetSeg.innerHTML = html;
+                    targetSeg.style.display = "block";
+                    targetSeg.parentElement.style.display = "block";
+                }
+            }
+        }).catch(() => {});
+
+    // Node 1: Wikipedia Summary Engine
     fetch("https://en.wikipedia.org/api/rest_v1/page/summary/" + wikiEncoded, { method: "GET" })
         .then(r => r.ok ? r.json() : Promise.reject())
         .then(data => {
@@ -173,31 +202,31 @@ function performSearch() {
             } else { updateNodeIndicator(1, "EMPTY", "status-offline"); }
         }).catch(() => updateNodeIndicator(1, "TIMEOUT", "status-offline"));
 
-    // Node 2: Open Library Print
+    // Node 2: Open Library Print Catalog
     executeStream(2, "https://openlibrary.org/search.json?title=" + encoded + "&limit=6", d => {
         if(!d.docs || d.docs.length === 0) return "";
         return '<ul class="dense-data-list">' + d.docs.map(b => '<li><b>[Print Text]</b> <i>"' + b.title + '"</i> — ' + (b.author_name ? b.author_name[0] : "Unspecified Author") + '</li>').join('') + '</ul>';
     }, "Open Library Monograph System");
 
-    // Node 3: Open Library Subject
+    // Node 3: Open Library Subject Matrix
     executeStream(3, "https://openlibrary.org/subjects/" + encoded.toLowerCase() + ".json?limit=6", d => {
         if(!d.works || d.works.length === 0) return "";
         return '<p style="padding-left:15px; margin:5px 0; font-size:13px; color:#444;"><b>Institutional Curriculum Classifications:</b> ' + d.works.map(w => '"' + w.title + '"').join(', ') + '</p>';
     }, "Open Library Academic Core Subject Mapping");
 
-    // Node 4: CrossRef
+    // Node 4: CrossRef Global Academic Journal Index
     executeStream(4, "https://api.crossref.org/works?query=" + encoded + "&rows=6", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[Academic Journal]</b> ' + (i.title && i.title[0] ? i.title[0] : "Active Open DOI Object") + ' <small style="color:#666;">('+(i.publisher || "Global Metadata Node")+')</small></li>').join('') + '</ul>';
     }, "CrossRef Serial DOI Directory Network");
 
-    // Node 5: Europe PMC
+    // Node 5: Europe PMC Medical Abstract Index
     executeStream(5, "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=" + encoded + "&format=json&pageSize=6", d => {
         if(!d.resultList || !d.resultList.result || d.resultList.result.length === 0) return "";
         return '<ul class="dense-data-list">' + d.resultList.result.map(r => '<li><b>[Clinical Study]</b> "' + r.title + '" — <small>Investigators: ' + (r.authorString || "Medical Unit Assignment") + '</small></li>').join('') + '</ul>';
     }, "Europe PMC Biomedical Reference Database");
 
-    // Node 6: NASA
+    // Node 6: NASA Media Lab Vector Engine
     fetch("https://images-api.nasa.gov/search?q=" + encoded + "&media_type=image")
         .then(r => r.ok ? r.json() : Promise.reject())
         .then(d => {
@@ -210,19 +239,19 @@ function performSearch() {
             } else { updateNodeIndicator(6, "EMPTY", "status-offline"); }
         }).catch(() => updateNodeIndicator(6, "TIMEOUT", "status-offline"));
 
-    // Node 7: LOC
+    // Node 7: United States Library of Congress Master Chronicles
     executeStream(7, "https://www.loc.gov/search/?q=" + encoded + "&fo=json&c=6", d => {
         if(!d.results || d.results.length === 0) return "";
         return '<ul class="dense-data-list">' + d.results.slice(0,5).map(r => '<li><b>[National Record]</b> ' + r.title + ' (' + (r.date || "Historical Asset") + ')</li>').join('') + '</ul>';
     }, "Library of Congress Historical Archives");
 
-    // Node 8: DBpedia
+    // Node 8: DBpedia Linked Semantic Ontology Grid
     executeStream(8, "https://lookup.dbpedia.org/api/search?query=" + encoded + "&format=JSON", d => {
         if(!d.docs || d.docs.length === 0) return "";
         return '<ul class="dense-data-list">' + d.docs.slice(0,4).map(doc => '<li><b>[Structured Node]</b> ' + doc.label + ' — ' + (doc.comment ? doc.comment[0] : "Ontology Relational Asset") + '</li>').join('') + '</ul>';
     }, "DBpedia Semantic Knowledge Base Graphs");
 
-    // Node 9: arXiv
+    // Node 9: arXiv Theoretical Physics & Math Quantitative Preprints
     executeStream(9, "https://export.arxiv.org/api/query?search_query=all:" + encoded + "&max_results=5", d => {
         var text = String(d); var entries = text.split("<entry>"); if(entries.length <= 1) return "";
         var html = '<ul class="dense-data-list">';
@@ -234,68 +263,68 @@ function performSearch() {
         html += '</ul>'; return html;
     }, "arXiv Quantitative Physics & Computing Preprints");
 
-    // Node 10: Unpaywall
+    // Node 10: Unpaywall Open Access Document Routing Network
     executeStream(10, "https://api.unpaywall.org/v2/search?query=" + encoded + "&email=euphoria@school.edu", d => {
         if(!d.results || d.results.length === 0) return "";
         var freePapers = d.results.filter(r => r.is_oa).slice(0,4); if(freePapers.length === 0) return "";
         return '<ul class="dense-data-list">' + freePapers.map(p => '<li><b>[Verified Open Access PDF Terminal Link]</b> <a href="'+p.doi_url+'" target="_blank">'+p.doi_url+'</a></li>').join('') + '</ul>';
     }, "Unpaywall Open Access Document Relays");
 
-    // Node 11: PLOS ONE
+    // Node 11: PLOS ONE Open Access Research Repository
     executeStream(11, "https://api.plos.org/search?q=title:" + encoded + "&rows=4&wt=json", d => {
         if(!d.response || !d.response.docs || d.response.docs.length === 0) return "";
         return '<ul class="dense-data-list">' + d.response.docs.map(doc => '<li><b>[PLOS ONE Record]</b> ' + doc.title_display + ' <small style="color:#555;">('+doc.journal+')</small></li>').join('') + '</ul>';
     }, "Public Library of Science (PLOS) Hub");
 
-    // Node 12: BioMed
+    // Node 12: BioMed Central Life Science Tracking Server
     executeStream(12, "https://api.crossref.org/journals/1471-2105/works?query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[BioMed Molecular Serial]</b> ' + (i.title && i.title[0] ? i.title[0] : "Biomedical Document Node") + '</li>').join('') + '</ul>';
     }, "BioMed Central System Protocols");
 
-    // Node 13: CORE
+    // Node 13: CORE Public Infrastructure Funding Analyzer
     executeStream(13, "https://api.crossref.org/works?filter=has-funder:true&query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[Funded Protocol]</b> ' + (i.title && i.title[0] ? i.title[0] : "Institutional Research Program") + ' <small style="color:green;">(Funder Vector: '+(i.funder ? i.funder[0].name : "Public Institutional Grantor") + ')</small></li>').join('') + '</ul>';
     }, "CORE Institutional Aggregator Arrays");
 
-    // Node 14: Biodiversity
+    // Node 14: Biodiversity Heritage Historical Taxonomy Engine
     executeStream(14, "https://api.crossref.org/works?container-title=biodiversity&query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[Taxonomic Listing]</b> ' + (i.title && i.title[0] ? i.title[0] : "Natural History Record Entry") + '</li>').join('') + '</ul>';
     }, "Biodiversity Heritage Biological Repositories");
 
-    // Node 15: OpenAlex
+    // Node 15: OpenAlex Universal Science Reference Graph
     executeStream(15, "https://api.openalex.org/works?search=" + encoded + "&per_page=4", d => {
         if(!d.results || d.results.length === 0) return "";
         return '<ul class="dense-data-list">' + d.results.map(w => '<li><b>[Relational Map Node]</b> ' + w.title + ' — <small style="color:#555;">Global Citation Processing Weight: ' + w.cited_by_count + '</small></li>').join('') + '</ul>';
     }, "OpenAlex Academic Knowledge Ecosystems");
 
-    // Node 16: Internet Archive
+    // Node 16: Internet Archive Digital System Ledger
     executeStream(16, "https://archive.org/advancedsearch.php?q=" + encoded + "&fl[]=title,year&output=json&rows=4", d => {
         if(!d.response || !d.response.docs || d.response.docs.length === 0) return "";
         return '<ul class="dense-data-list">' + d.response.docs.map(doc => '<li><b>[Archived Material Vault]</b> <i>"' + doc.title + '"</i> (' + (doc.year || "Undated Artifact") + ')</li>').join('') + '</ul>';
     }, "Internet Archive Open Library Systemic Grid");
 
-    // Node 17: Semantic Scholar
+    // Node 17: Semantic Scholar Cognitive AI Graph Relay
     executeStream(17, "https://api.crossref.org/works?filter=has-references:true&query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[Semantic Node Anchor]</b> ' + (i.title && i.title[0] ? i.title[0] : "Graph Node Connection") + ' <small style="color:blue;">(' + i.references_count + ' Linked Citations Extracted)</small></li>').join('') + '</ul>';
     }, "Semantic Scholar Discovery Vectors");
 
-    // Node 18: DOAJ
+    // Node 18: DOAJ Directory of Open Access Serials
     executeStream(18, "https://api.crossref.org/works?filter=is-update:false&query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[DOAJ Registry Document]</b> ' + (i.title && i.title[0] ? i.title[0] : "Verified Catalog Entry Paper") + '</li>').join('') + '</ul>';
     }, "DOAJ Open Access Directory Registries");
 
-    // Node 19: Wikisource
+    // Node 19: Wikisource Historical Source Text Ledger
     executeStream(19, "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + encoded + "&limit=4&namespace=0&format=json&origin=*", d => {
         if(!d[1] || d[1].length === 0) return "";
         return '<ul class="dense-data-list">' + d[1].map((title, x) => '<li><b>[Primary Source File]</b> <a href="'+d[3][x]+'" target="_blank">'+title+'</a></li>').join('') + '</ul>';
     }, "Wikisource Primary Historical Assets");
 
-    // Node 20: DataCite
+    // Node 20: DataCite Empirical Numeric Datasets
     executeStream(20, "https://api.crossref.org/works?filter=has-license:true&query=" + encoded + "&rows=4", d => {
         if(!d.message || !d.message.items || d.message.items.length === 0) return "";
         return '<ul class="dense-data-list">' + d.message.items.map(i => '<li><b>[Empirical Matrix Dataset]</b> Object DOI Reference: ' + i.DOI + ' <small style="color:#555;">(' + i.type + ')</small></li>').join('') + '</ul>';
@@ -306,7 +335,7 @@ function performSearch() {
 <body>
 
 <div id="header">
-    <h1>euPhoria Researcher Matrix v24.0</h1>
+    <h1>euPhoria Researcher Matrix v25.0</h1>
     <p>20-Node Clean Structured Academic Dossier Engine // Cloud Dancer Edition</p>
 </div>
 
@@ -336,26 +365,26 @@ function performSearch() {
             <div class="sidebar-box">
                 <h3>20-Node Grid Cluster State</h3>
                 <ul class="node-status-list">
-                    <li>1. Wiki Summary <span id="node-1"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>2. OpenLib Prints <span id="node-2"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>3. OpenLib Subject <span id="node-3"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>4. CrossRef Serials <span id="node-4"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>5. Europe PMC Med <span id="node-5"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>6. NASA Space Lab <span id="node-6"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>7. Lib of Congress <span id="node-7"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>8. DBpedia Facts <span id="node-8"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>9. arXiv Preprints <span id="node-9"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>10. Unpaywall Router <span id="node-10"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>11. PLOS Journals <span id="node-11"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>12. BioMed Bio Logs <span id="node-12"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>13. CORE Repositories <span id="node-13"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>14. Biodiversity Lab <span id="node-14"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>15. OpenAlex Mapping <span id="node-15"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>16. Internet Archive <span id="node-16"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>17. Semantic Scholar <span id="node-17"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>18. DOAJ Journals <span id="node-18"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>19. Wikisource Ledger <span id="node-19"><b style="color:#8A9FAF;">READY</b></span></li>
-                    <li>20. DataCite Metrics <span id="node-20"><b style="color:#8A9FAF;">READY</b></span></li>
+                    <li>1. Wiki Summary <span id="node-1"></span></li>
+                    <li>2. OpenLib Prints <span id="node-2"></span></li>
+                    <li>3. OpenLib Subject <span id="node-3"></span></li>
+                    <li>4. CrossRef Serials <span id="node-4"></span></li>
+                    <li>5. Europe PMC Med <span id="node-5"></span></li>
+                    <li>6. NASA Space Lab <span id="node-6"></span></li>
+                    <li>7. Lib of Congress <span id="node-7"></span></li>
+                    <li>8. DBpedia Facts <span id="node-8"></span></li>
+                    <li>9. arXiv Preprints <span id="node-9"></span></li>
+                    <li>10. Unpaywall Router <span id="node-10"></span></li>
+                    <li>11. PLOS Journals <span id="node-11"></span></li>
+                    <li>12. BioMed Bio Logs <span id="node-12"></span></li>
+                    <li>13. CORE Repositories <span id="node-13"></span></li>
+                    <li>14. Biodiversity Lab <span id="node-14"></span></li>
+                    <li>15. OpenAlex Mapping <span id="node-15"></span></li>
+                    <li>16. Internet Archive <span id="node-16"></span></li>
+                    <li>17. Semantic Scholar <span id="node-17"></span></li>
+                    <li>18. DOAJ Journals <span id="node-18"></span></li>
+                    <li>19. Wikisource Ledger <span id="node-19"></span></li>
+                    <li>20. DataCite Metrics <span id="node-20"></span></li>
                 </ul>
             </div>
         </div>
