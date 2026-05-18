@@ -16,7 +16,7 @@ body {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     background-color: #F5F5F5;
     color: #222222;
-    font-size: 13px; /* Slightly scaled up base font size for full screen reading */
+    font-size: 16px; /* Increased from 13px for universally larger text */
     overflow-x: hidden; 
     width: 100%;
     display: flex;
@@ -27,21 +27,21 @@ body {
     background: linear-gradient(to bottom, #111111 0%, #1A1A1A 100%);
     border-bottom: 3px solid #990000;
     border-bottom: 3px solid var(--accent-color, #990000);
-    padding: 15px 25px;
+    padding: 20px 30px;
     color: #FFFFFF;
     flex-shrink: 0;
 }
 #header h1 {
     margin: 0px;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 32px; /* Scaled up header text */
+    font-size: 38px; /* Increased from 32px */
     font-style: italic;
     color: #FFFFFF;
     text-shadow: 1px 1px 3px var(--accent-shadow, rgba(153, 0, 0, 0.8));
 }
 #header p {
-    margin: 5px 0px 0px 0px;
-    font-size: 12px;
+    margin: 7px 0px 0px 0px;
+    font-size: 14px; /* Increased from 12px */
     letter-spacing: 1px;
     color: #BBBBBB;
 }
@@ -49,8 +49,8 @@ body {
 #navbar {
     background-color: #EAEAEA;
     border-bottom: 1px solid #CCCCCC;
-    padding: 8px 25px;
-    font-size: 12px;
+    padding: 12px 30px;
+    font-size: 14px; /* Increased from 12px */
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@ body {
 .nav-links a {
     color: #333333;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 25px;
 }
 .nav-links a:hover {
     color: var(--accent-color, #990000);
@@ -75,20 +75,20 @@ body {
     border-left: 1px solid #FFF;
     border-bottom: 1px solid #777;
     border-right: 1px solid #777;
-    padding: 2px 8px;
-    font-size: 11px;
+    padding: 4px 10px;
+    font-size: 13px; /* Increased from 11px */
     cursor: pointer;
 }
 #colorPicker {
-    margin-left: 6px;
+    margin-left: 8px;
     padding: 0px;
-    width: 36px;
-    height: 20px;
+    width: 40px;
+    height: 24px;
     border: 1px solid #555;
     cursor: pointer;
     vertical-align: middle;
 }
-/* Main Expanded Layout Container - Replaces old narrow wrapper */
+/* Main Expanded Layout Container */
 #container {
     width: 100%;
     flex-grow: 1;
@@ -100,27 +100,27 @@ body {
 #search-zone {
     background-color: #FAFAFA;
     border-bottom: 2px dashed #CCCCCC;
-    padding: 25px;
+    padding: 30px;
     text-align: center;
     flex-shrink: 0;
 }
 .search-box {
-    font-size: 18px; /* Scaled up inputs */
-    padding: 6px;
-    width: 55%; /* Fluid wide scaling instead of fixed pixels */
+    font-size: 20px; /* Increased from 18px */
+    padding: 8px;
+    width: 55%; 
     max-width: 800px;
     border: 1px solid #999999;
     color: #222222;
 }
 .btn-2005 {
-    font-size: 15px;
+    font-size: 18px; /* Increased from 15px */
     font-weight: bold;
     background: #E5E5E5;
     border-top: 2px solid #FFF;
     border-left: 2px solid #FFF;
     border-bottom: 2px solid #555;
     border-right: 2px solid #555;
-    padding: 5px 15px;
+    padding: 7px 20px;
     cursor: pointer;
     color: #222222;
     vertical-align: top;
@@ -138,34 +138,34 @@ body {
 }
 /* Wide Left Sidebar with Sources */
 #sidebar {
-    width: 280px; /* Slightly wider panel space for screen balance */
+    width: 320px; /* Slightly widened to gracefully accommodate larger text elements */
     background-color: #EFEFEF;
     border-right: 1px solid #CCCCCC;
-    padding: 20px;
+    padding: 25px;
     box-sizing: border-box;
     flex-shrink: 0;
 }
 .sidebar-box {
     background: #FFFFFF;
     border: 1px solid #CCCCCC;
-    padding: 12px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 25px;
 }
 .sidebar-box h3 {
-    margin: 0 0 10px 0;
-    font-size: 13px;
+    margin: 0 0 12px 0;
+    font-size: 16px; /* Increased from 13px */
     color: var(--accent-color, #990000);
     border-bottom: 1px solid #EAEAEA;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
 }
 .sidebar-box ul {
     list-style-type: square;
     margin: 0px;
-    padding-left: 18px;
+    padding-left: 22px;
 }
 .sidebar-box li {
-    margin-bottom: 6px;
-    font-size: 12px;
+    margin-bottom: 8px;
+    font-size: 14px; /* Increased from 12px */
 }
 .sidebar-box a {
     color: #444444;
@@ -177,53 +177,53 @@ body {
 }
 /* Dictionary Sidebar Elements */
 .dict-input {
-    width: 140px;
-    font-size: 12px;
-    padding: 3px;
+    width: 150px;
+    font-size: 14px; /* Increased from 12px */
+    padding: 5px;
     border: 1px solid #999999;
 }
 .btn-dict {
-    font-size: 12px;
-    padding: 2px 6px;
+    font-size: 14px; /* Increased from 12px */
+    padding: 4px 8px;
     font-weight: bold;
 }
 #dict-result {
-    margin-top: 10px;
-    padding: 8px;
+    margin-top: 12px;
+    padding: 10px;
     background-color: #FAFAFA;
     border: 1px dotted #999999;
-    font-size: 12px;
-    line-height: 1.4;
-    max-height: 200px;
+    font-size: 14px; /* Increased from 12px */
+    line-height: 1.5;
+    max-height: 220px;
     overflow-y: auto;
 }
 /* Expansive Main Content Window */
 #main-content {
     flex-grow: 1;
-    padding: 25px;
+    padding: 30px;
     background-color: #FFFFFF;
 }
 /* Article Formatting Styling */
 .article-title {
     font-family: Georgia, serif;
     color: var(--accent-color, #990000);
-    font-size: 28px; /* High resolution scale */
+    font-size: 34px; /* Increased from 28px */
     margin-top: 0px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     border-bottom: 1px solid #CCCCCC;
-    padding-bottom: 6px;
+    padding-bottom: 8px;
 }
 .meta-info {
-    font-size: 12px;
+    font-size: 14px; /* Increased from 12px */
     color: #444444;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background-color: #FAFAFA;
-    padding: 8px;
+    padding: 12px;
     border: 1px dashed var(--accent-color, #990000);
 }
 .article-text {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 17px; /* Increased from 14px */
+    line-height: 1.7;
     text-align: justify;
 }
 .article-text b {
@@ -231,13 +231,13 @@ body {
 }
 .article-image {
     float: right;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-bottom: 25px;
     background-color: #EAEAEA;
     border: 3px double #999999;
-    padding: 6px;
+    padding: 8px;
     text-align: center;
-    width: 300px; /* Scaled visual preview window */
+    width: 320px;
 }
 .article-image img {
     width: 100%;
@@ -246,37 +246,37 @@ body {
     filter: grayscale(100%);
 }
 .image-caption {
-    font-size: 11px;
+    font-size: 13px; /* Increased from 11px */
     color: #555555;
     font-style: italic;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 /* Action Buttons */
 .action-pane {
-    margin-top: 25px;
+    margin-top: 30px;
     background-color: #FAFAFA;
-    padding: 12px;
+    padding: 15px;
     border: 1px solid #EAEAEA;
 }
 #summary-box {
     display: none;
-    margin-top: 20px;
+    margin-top: 25px;
     background-color: #FAFAFA;
     border: 1px solid var(--accent-color, #990000);
-    padding: 20px;
+    padding: 25px;
 }
 #summary-box h4 {
-    margin: 0 0 8px 0;
+    margin: 0 0 10px 0;
     color: var(--accent-color, #990000);
-    font-size: 14px;
+    font-size: 17px; /* Increased from 14px */
 }
 /* Satin Black Hit Counter Footer */
 #footer {
     background-color: #111111;
     color: #CCCCCC;
     text-align: center;
-    padding: 18px;
-    font-size: 12px;
+    padding: 22px;
+    font-size: 14px; /* Increased from 12px */
     border-top: 2px solid var(--accent-color, #990000);
     flex-shrink: 0;
 }
@@ -284,14 +284,13 @@ body {
     background-color: #000000;
     color: #FF3333;
     font-family: "Courier New", Courier, monospace;
-    padding: 2px 6px;
+    padding: 3px 8px;
     font-weight: bold;
     border: 1px solid #444444;
 }
 </style>
 
 <script type="text/javascript">
-// Hardened Static Fail-Safe Knowledge Node Network Database
 var researchDatabase = {
     "quantum mechanics": {
         title: "Quantum Mechanics and Wave-Particle Duality in Modern Physics",
@@ -311,7 +310,6 @@ var researchDatabase = {
     }
 };
 
-// Native CSS Variables System Matrix Color Initialization Engine
 function applySystemColorTheme(hexValue) {
     document.documentElement.style.setProperty('--accent-color', hexValue);
     var r = parseInt(hexValue.substr(1,2), 16);
@@ -323,7 +321,6 @@ function applySystemColorTheme(hexValue) {
     if (searchLabel) searchLabel.style.color = hexValue;
 }
 
-// Home View Reset Protocol Trigger Execution
 function activateHomeView() {
     var resultsDiv = document.getElementById("article-display");
     var summaryBox = document.getElementById("summary-box");
@@ -335,7 +332,7 @@ function activateHomeView() {
         <h2 class="article-title">Welcome to euPhoria Researcher Database</h2>
         <p>Use the search input console above to query integrated reference systems simultaneously. Your results will display localized multi-paragraph literature profiles, diagnostic imagery, and automated matrix summarization options.</p>
         <h3>Supported Networks Included in Meta-Querying:</h3>
-        <table width="100%" border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; border-color: #CCCCCC; font-size: 12px;">
+        <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; border-color: #CCCCCC; font-size: 14px;">
         <tr bgcolor="#EAEAEA">
             <td><b><font color="var(--accent-color, #990000)">General Reference</font></b></td>
             <td><b><font color="var(--accent-color, #990000)">Open Access Papers</font></b></td>
@@ -350,7 +347,6 @@ function activateHomeView() {
     }
 }
 
-// Anti-Gibberish Lexical Evaluation Filter Block
 function isGibberish(str) {
     var cleanStr = str.replace(/[^a-zA-Z]/g, "").toLowerCase();
     if (cleanStr.length === 0) return false;
@@ -360,7 +356,6 @@ function isGibberish(str) {
     return false;
 }
 
-// Complete 100% Guaranteed Execution Search Engine Pipeline
 function performSearch() {
     var rawInput = document.getElementById("searchQuery");
     if (!rawInput) return;
@@ -389,7 +384,6 @@ function performSearch() {
         return;
     }
 
-    // Local Pipeline Match Check
     if (researchDatabase[queryNormalized]) {
         renderArticle(researchDatabase[queryNormalized], queryNormalized);
         return;
@@ -433,7 +427,6 @@ function performSearch() {
         var imgAsset = "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400";
         var imgCaption = "Fig 1.0: Automated Federated Data Graph Composite Index.";
 
-        // 1. Blend Wikipedia Engine
         if (wikiData && wikiData.type !== "not_found" && wikiData.type !== "disambiguation" && wikiData.extract) {
             sourcesList.push("Wikipedia Core Knowledge System");
             summaryText = wikiData.extract;
@@ -446,7 +439,6 @@ function performSearch() {
             bodyBlocks.push(`<p><b>Section I: Primary Subject Manifest &amp; Fundamental Principles</b></p><p>${wikiData.extract_html ? wikiData.extract_html : wikiData.extract}</p>`);
         }
 
-        // 2. Blend Open Library System
         if (olData && olData.docs && olData.docs.length > 0) {
             sourcesList.push("Open Library Catalog Matrices");
             var bookLines = "";
@@ -460,7 +452,6 @@ function performSearch() {
             bodyBlocks.push(`<p><b>Section II: Documented Global Print Monograph Bibliography</b></p><ul>${bookLines}</ul>`);
         }
 
-        // 3. Blend CrossRef Metadata
         if (crossRefData && crossRefData.message && crossRefData.message.items && crossRefData.message.items.length > 0) {
             sourcesList.push("CrossRef Federated Metadata Engine");
             var paperLines = "";
@@ -538,7 +529,6 @@ function showSummary(key) {
     window.scrollTo(0, document.body.scrollHeight);
 }
 
-// Hardened Dictionary API Function Layer
 function lookupWord() {
     var wordInputEl = document.getElementById("dictWord");
     var resultContainer = document.getElementById("dict-result");
@@ -584,7 +574,6 @@ function lookupWord() {
         <a href="#">Global Directory</a> |
         <a href="#">Help Desk / FAQ</a>
     </div>
-    <!-- Interactive Color Setting Node Unit -->
     <div id="settings-control">
         <strong>System Color Matrix:</strong>
         <input type="color" id="colorPicker" value="#990000" oninput="applySystemColorTheme(this.value);">
@@ -600,7 +589,7 @@ function lookupWord() {
             <input type="text" id="searchQuery" class="search-box" value="Quantum Mechanics">
             <input type="submit" value="Search Database!" class="btn-2005">
         </form>
-        <div style="margin-top: 6px; font-size: 12px; color: #555555;">
+        <div style="margin-top: 8px; font-size: 14px; color: #555555;">
             <i>Tip: Try typing <b>Quantum Mechanics</b>, <b>Artificial Intelligence</b>, or enter custom data inquiries!</i>
         </div>
     </div>
@@ -640,9 +629,9 @@ function lookupWord() {
             <!-- Infrastructure News Logs -->
             <div class="sidebar-box">
                 <h3>System News</h3>
-                <font size="2" color="#555555">
+                <font size="3" color="#555555">
                     <b>May 17, 2026:</b><br>
-                    Upgraded layout framework to fluid full-page scaling matrix. Fixed viewport zooming bounds. Removed hardcoded pixel constraints to fit large resolution monitors dynamically.
+                    Optimized interface readability metrics across all dynamic blocks. Universal text scale increment executed successfully to eliminate micro-text eye fatigue during research marathons.
                 </font>
             </div>
         </div>
@@ -654,7 +643,7 @@ function lookupWord() {
                 <p>Use the search input console above to query integrated reference systems simultaneously. Your results will display localized multi-paragraph literature profiles, diagnostic imagery, and automated matrix summarization options.</p>
                 
                 <h3>Supported Networks Included in Meta-Querying:</h3>
-                <table width="100%" border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; border-color: #CCCCCC; font-size: 12px;">
+                <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; border-color: #CCCCCC; font-size: 14px;">
                 <tr bgcolor="#EAEAEA">
                     <td><b><font color="var(--accent-color, #990000)">General Reference</font></b></td>
                     <td><b><font color="var(--accent-color, #990000)">Open Access Papers</font></b></td>
@@ -671,7 +660,7 @@ function lookupWord() {
             <!-- Live Summary Display Module -->
             <div id="summary-box">
                 <h4>euPhoria Automated Article Summary:</h4>
-                <p id="summary-text" style="font-size: 13px; font-style: italic; color: #222222; margin: 0px;"></p>
+                <p id="summary-text" style="font-size: 15px; font-style: italic; color: #222222; margin: 0px;"></p>
             </div>
         </div>
     </div>
